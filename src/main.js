@@ -1,6 +1,7 @@
 import './assets/css/main.scss'
 import "./assets/css/fontawesome-all.min.css"
 import 'bootstrap/dist/css/bootstrap.css'
+import 'vue3-carousel/dist/carousel.css'
 import { createApp } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import App from './App.vue'
