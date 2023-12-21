@@ -1,5 +1,5 @@
 <script setup>
-    import { Carousel, Slide, Navigation, Pagination } from 'vue3-carousel'
+    import { Carousel, Slide, Navigation } from 'vue3-carousel'
     const list =[
         "https://picsum.photos/200/300",
         "https://picsum.photos/200/300",
@@ -11,44 +11,60 @@
 
 <template>
     <div class="home container-fluid text-light">
-        <!-- <img src="https://picsum.photos/200/300" class="rounded-circle object-fit-cover" style="width: 30vh; height: 30vh"/>
-        <img src="https://picsum.photos/200/300" class="rounded-circle object-fit-cover" style="width: 30vh; height: 30vh"/> -->
-        <Carousel>
-            <Slide v-for="slide in list" :key="slide">
-                <img :src="slide" class="carousel__item rounded-circle object-fit-cover" style="width: 30vh; height: 30vh"/>
-            </Slide>
-            <template #addons>
-                <Navigation />
-                <Pagination />
-            </template>
-        </Carousel>
+        <div class="carousel-container d-flex align-items-center justify-content-around">
+            <Carousel :items-to-show="1" wrap-around="true" :autoplay="5000" :transition="500" pause-autoplay-on-hover="true">
+                <Slide v-for="slide in list" :key="slide">
+                    <img :src="slide" class="carousel__item h-100 w-100 rounded-circle object-fit-cover"/>
+                </Slide>
+                <template #addons>
+                    <Navigation />
+                </template>
+            </Carousel>
+            <Carousel :items-to-show="1" wrap-around="true" :autoplay="5000" :transition="500" pause-autoplay-on-hover="true">
+                <Slide v-for="slide in list" :key="slide">
+                    <img :src="slide" class="carousel__item h-100 w-100 rounded-circle object-fit-cover"/>
+                </Slide>
+                <template #addons>
+                    <Navigation />
+                </template>
+            </Carousel>
+        </div>
     </div>
 </template>
 
 <style scoped lang="scss">
 .home{
     min-height: 90vh;
-    background: linear-gradient(180deg, #000 0%, #3d131b 80%);
+    background: linear-gradient(180deg, #000 0%, #1b0c0c 50%);
 }
-.carousel__item {
-  min-height: 200px;
-  width: 100%;
-  background-color: #000;
-  color: #fff;
-  font-size: 20px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.carousel__slide {
-  padding: 10px;
-}
-
-.carousel__prev,
-.carousel__next {
-  box-sizing: content-box;
-  border: 5px solid white;
+.carousel-container{
+    $carousel_scale: 500px;
+    height: $carousel_scale;
+    .carousel{
+        width: $carousel_scale;
+        .carousel__slide{
+            transition: all linear 300ms;
+            transform: scale(0.5);
+            opacity: 0.5;
+        }
+        .carousel__slide--active{
+            transform: scale(1);
+            opacity: 1;
+        }
+        .carousel__item{
+            max-width: $carousel_scale;
+            max-height: $carousel_scale;
+            aspect-ratio: 1/1;
+        }
+    }
+    :deep(.carousel__prev), :deep(.carousel__next) {
+        margin: 0 !important;
+        color: #fff;
+    }
+    :deep(.carousel__icon){
+        width: 30px;
+        height: 30px;
+    }
 }
 </style>
 
