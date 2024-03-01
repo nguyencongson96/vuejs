@@ -3,6 +3,7 @@ import LoginPage from "@/views/auth/Login.vue"
 import RegisterPage from "@/views/auth/Register.vue"
 import ForgotPage from "@/views/auth/Forgot.vue"
 import Header from "@/layout/header.vue"
+import RecipeHome from "@/views/recipe/Home.vue"
 import { createRouter, createWebHistory } from "vue-router"
 
 const router = createRouter({
@@ -40,6 +41,16 @@ const router = createRouter({
             },
             meta: {
                 title: 'HomePage'
+            }
+        },
+        {
+            path: "/recipe",
+            components: {
+                default: RecipeHome,
+                header: Header,
+            },
+            meta: {
+                title: 'Recipe'
             }
         },
     ],

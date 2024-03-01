@@ -5,36 +5,35 @@ export default {
 </script>
 
 <template>
-    <div class="header bg-black py-3 container d-flex align-items-stretch gap-2">
+    <div class="bg-black py-3 container d-flex justify-content-between align-items-center gap-2">
         <router-link to="/" class="img-container">
             <img class="object-fit-cover" src="/logo-without-bg.png" alt="logo"/>
         </router-link>
-        <nav class="text-light d-flex align-items-center gap-5 ms-auto">
-            <router-link class="link-white" to="/auth/register">Recipe</router-link>
-            <router-link class="link-white" to="/auth/forgot">Shop</router-link>
-            <router-link class="link-white" to="/auth/forgot">About Us</router-link>
-            <div>Hi, user</div>
+        <nav class="flex-fill">
+            <div class="text-light d-flex justify-content-end align-items-center gap-4">
+                <router-link class="link-white" to="/recipe">Recipe</router-link>
+                <router-link class="link-white" to="/auth/forgot">Shop</router-link>
+                <router-link class="link-white" to="/auth/forgot">About Us</router-link>
+                <div>Hi, User</div>
+            </div>
         </nav>
     </div>
 </template>
 
 <style scoped lang="scss">
-.header {
-    max-height: 12vh;
-}
 .img-container{
+    height: 100%;
     img{
-        max-height: 100%;
+        max-height: 60px;
         max-width: 100%;
         aspect-ratio: 1/1;
     }
 }
-nav {
-    $color: #f0d67c;
-    $border-width: 2px;
-    $font-size: 1.5rem;
+nav > div {
+    $border-width: 1px;
+    $font-size: 1.25rem;
     & > * {
-        color: $color !important;
+        color: var(--yellow) !important;
         font-weight: 500;
         font-size: $font-size;
     }
@@ -59,21 +58,21 @@ nav {
         }
 
         &:before {
+            transform: skew(-81deg, 0);
             border-top: $border-width solid transparent;
             border-bottom: $border-width solid transparent;
-            transform: skew(-81deg, 0);
         }
-
+        
         &:after {
-            transform: skew(0, 40deg);
             border-left: $border-width solid transparent;
             border-right: $border-width solid transparent;
+            transform: skew(0, 40deg);
         }
 
         &:hover {
             &:before,
             &:after {
-                border-color: $color;
+                border-color: var(--yellow);
                 transform: skew(0, 0);
             }
         }

@@ -1,193 +1,126 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onBeforeMount, ref } from 'vue'
+import imageCarousel from '@/components/carousel/image-carousel.vue'
+import textCarousel from '@/components/carousel/text-carousel.vue'
+import genreData from '../../public/data/genres'
+import flavorData from '../../public/data/flavor'
 // import api from "../utils/api"
-    const activeGenreSlide = ref(0);
-    const activeFlavorSlide = ref(0)
-    const changeText = ref("")
-    const listGenre = [
-        {
-            genre: "Classical",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/1VhGCAPTtL4McrhW%2Fclassical.jpg?alt=media&token=8e99ea00-e108-4f9d-9e02-edd7179407cb"
-        },
-        {
-            genre: "Electronic",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/7su69sTcafSpgsih%2Felectronic.jpg?alt=media&token=716a8ad3-9234-476f-84b1-d2c0e760fac5"
-        },
-        {
-            genre: "Jazz",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/AwPku3OkTVbrvKeA%2Fjazz.jpg?alt=media&token=63a8def5-8fe0-483f-aa20-8b6c67574345"
-        },
-        {
-            genre: "Hip Hop",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/NJ9QC5f1l0entwOO%2Fhiphop.jpg?alt=media&token=c396e85b-8628-4df6-a678-67674339e8dc"
-        },
-        {
-            genre: "Lounge",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/PQ2uISC3YeAUvTXU%2Flounge.jpg?alt=media&token=c9c6df80-788f-450c-8075-4b607e1e741a"
-        },
-        {
-            genre: "R&B",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/eSGnAvTJOANJDz80%2Fr%26b.jpg?alt=media&token=43cee135-f587-44dd-a501-505b30aeb938"
-        },
-        {
-            genre: "Soul",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/jds0zwE31NtOXcyA%2Fsoul.jpg?alt=media&token=a807ae51-c344-487e-90a9-78aca41028e3"
-        }
-    ]
-    const listFlavor = [
-        {
-            genre: "Classical",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/1VhGCAPTtL4McrhW%2Fclassical.jpg?alt=media&token=8e99ea00-e108-4f9d-9e02-edd7179407cb"
-        },
-        {
-            genre: "Electronic",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/7su69sTcafSpgsih%2Felectronic.jpg?alt=media&token=716a8ad3-9234-476f-84b1-d2c0e760fac5"
-        },
-        {
-            genre: "Jazz",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/AwPku3OkTVbrvKeA%2Fjazz.jpg?alt=media&token=63a8def5-8fe0-483f-aa20-8b6c67574345"
-        },
-        {
-            genre: "Hip Hop",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/NJ9QC5f1l0entwOO%2Fhiphop.jpg?alt=media&token=c396e85b-8628-4df6-a678-67674339e8dc"
-        },
-        {
-            genre: "Lounge",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/PQ2uISC3YeAUvTXU%2Flounge.jpg?alt=media&token=c9c6df80-788f-450c-8075-4b607e1e741a"
-        },
-        {
-            genre: "R&B",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/eSGnAvTJOANJDz80%2Fr%26b.jpg?alt=media&token=43cee135-f587-44dd-a501-505b30aeb938"
-        },
-        {
-            genre: "Soul",
-            image: "https://firebasestorage.googleapis.com/v0/b/collection-c2379.appspot.com/o/jds0zwE31NtOXcyA%2Fsoul.jpg?alt=media&token=a807ae51-c344-487e-90a9-78aca41028e3"
-        }
-    ]
+const activeGenreSlide = ref(0)
+const activeFlavorSlide = ref(0)
+const changeText = ref('')
+const listGenre = genreData.list
+const listFlavor = flavorData.list
 
-    function handleChange(actionType = "next", type = "genre"){
-        const listType = type === "genre" ? listGenre : listFlavor
-        const refType = type === "genre" ? activeGenreSlide : activeFlavorSlide
-        const currentValue = refType.value
-        changeText.value = type
-        setTimeout(()=> changeText.value = "", 300)
-        switch (actionType) {
-            case "previous":
-                refType.value = currentValue === 0 ? listType.length-1 : currentValue-1
-                break;
+function handleChange(actionType = 'next', type = 'genre') {
+    const listType = type === 'genre' ? listGenre : listFlavor
+    const refType = type === 'genre' ? activeGenreSlide : activeFlavorSlide
+    const currentValue = refType.value
+    changeText.value = type
+    switch (actionType) {
+        case 'previous':
+            refType.value = currentValue === 0 ? listType.length - 1 : currentValue - 1
+            break
 
-            case "next":
-                refType.value = currentValue === listType.length-1 ? 0 : currentValue+1
-                break;
-            default:
-                break;
-        }
-        console.log(activeGenreSlide.value)
+        case 'next':
+            refType.value = currentValue === listType.length - 1 ? 0 : currentValue + 1
+            break
+        default:
+            break
     }
+}
 
-    onMounted(async()=>{
-        console.log("run")
-        // try {
-        //     const res = await api.get("/drink");
-        //     console.log(res)
-        // } catch (error) {
-        //     console.log(error)
-        // }
-    })
+onBeforeMount(async () => {
+    console.log('run')
+    // try {
+    //     const res = await api.get("/drink");
+    //     console.log(res)
+    // } catch (error) {
+    //     console.log(error)
+    // }
+})
 </script>
 
 <template>
-    <div class="home container-fluid text-light d-flex align-items-center">
-        <div class="carousel-container d-flex align-items-center justify-content-around flex-fill">
-            <div class="carousel slide carousel-fade">
-                <div class="carousel-inner p-0">
-                    <div v-for="(item, index) in listGenre" :key="index" class="carousel-item d-block p-4" :class="{active: index === activeGenreSlide}">
-                        <img :src="item?.image" class="rounded-circle object-fit-cover w-100" alt="image">
-                    </div>
-                </div>
-                <button class="carousel-control-prev w-auto" @click="handleChange('previous', 'genre')">
-                    <i class="fa-solid fa-chevrons-left"></i>
-                </button>
-                <button class="carousel-control-next w-auto" @click="handleChange('next', 'genre')">
-                    <i class="fa-regular fa-chevrons-right"></i>
-                </button>
-            </div>
+    <div id="wrapper" class="container-fluid text-light d-flex align-items-center">
+        <div class="carousel-container d-flex align-items-center justify-content-center gap-2 flex-fill">
+            <imageCarousel
+                :transition_fade="true"
+                :list="listGenre"
+                type="genre"
+                :activeSlide="activeGenreSlide"
+                :handleChange="handleChange"
+                arrow_side="20px"
+            />
             <div class="text-container d-flex flex-column align-items-center gap-3 position-relative text-center">
                 <h2 class="fw-bold">I would like to listen to some</h2>
-                <div class="d-flex align-items-center position-relative">
-                    <h1 class="text-change" :class="{activeText: changeText === 'genre'}">
-                        {{ listGenre[activeGenreSlide].genre }}
-                    </h1>
-                    <h1 class="text-change" :class="{activeText: changeText === 'genre'}">
-                        {{ listGenre[activeGenreSlide].genre }}
-                    </h1>
-                </div>
+                <textCarousel :list="listGenre" :activeSlide="activeGenreSlide" keyToShow="genre" />
                 <h2 class="fw-bold">and drink something</h2>
-                <h1 class="text-change" :class="{activeText: changeText === 'flavor'}">
-                    {{ listFlavor[changeText === 'flavor' 
-                        ? activeFlavorSlide === 0 
-                            ? listFlavor.length-1 
-                            : activeFlavorSlide-1 
-                        : activeFlavorSlide].genre }}
-                </h1>
-                <button class="btn btn-primary border-0 lh-1 fs-2 rounded-pill fw-light fst-italic position-relative">Surprise me !!!</button>
+                <textCarousel :list="listFlavor" :activeSlide="activeFlavorSlide" keyToShow="genre" />
+                <button class="mt-5 btn btn-primary fs-3 rounded-pill fst-italic px-4 py-3">Surprise me !!!</button>
             </div>
-            <div class="carousel slide carousel-fade">
-                <ul class="carousel-inner p-0">
-                    <li v-for="(item, index) in listFlavor" :key="index" class="carousel-item d-block p-4" :class="{active: index === activeFlavorSlide}">
-                        <img :src="item?.image" class="rounded-circle object-fit-cover w-100" alt="image">
-                    </li>
-                </ul>
-                <button class="carousel-control-prev w-auto" @click="handleChange('previous', 'flavor')">
-                    <i class="fa-solid fa-chevrons-left"></i>
-                </button>
-                <button class="carousel-control-next w-auto" @click="handleChange('next', 'flavor')">
-                    <i class="fa-regular fa-chevrons-right"></i>
-                </button>
-            </div>
+            <imageCarousel
+                :list="listFlavor"
+                type="flavor"
+                :activeSlide="activeFlavorSlide"
+                :handleChange="handleChange"
+                arrow_side="20px"
+            />
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
-.home{
-    min-height: 88vh;
+#wrapper {
     background: linear-gradient(180deg, #000 0%, #1b0c0c 50%);
 }
-.carousel-container{
-    $carousel_scale: 450px;
-    $arrow-side: 20px;
-    height: $carousel_scale;
-    .carousel{
-        width: $carousel_scale;
+.text-container {
+    .btn {
+        background-color: #2d091f;
+        letter-spacing: 2.8px;
+        transition: all linear 300ms;
+        border-color: transparent;
+
+        &:hover {
+            border-color: rgba(236, 240, 241, 0.5);
+            box-shadow: rgba(236, 240, 241, 0.15) 0px 5px 15px;
+            animation: shake 1s ease-in-out both;
+            perspective: 1000px;
+        }
     }
-    button > i{
-        font-size: $arrow-side;
-        margin: 0 (-$arrow-side);
-    }
-    .carousel-item >img{
-        aspect-ratio: 1/1;
+
+    @keyframes shake {
+        10%,
+        90% {
+            transform: translateX(-1px);
+        }
+
+        20%,
+        80% {
+            transform: translateX(2px);
+        }
+
+        30%,
+        50%,
+        70% {
+            transform: translateX(-4px);
+        }
+
+        40%,
+        60% {
+            transform: translateX(4px);
+        }
     }
 }
-.text-container{
-    & > *{ margin-bottom: 0 }
-    .text-change {
-        font-style: italic;
-        font-weight: 300;
-        text-decoration: underline;
-        opacity: 1;
-        transition: 300ms all ease-in-out;
-        position: relative;
-        top:0;
-    }
-    .activeText{
-        opacity: 0;
-    }
-    .btn{
-        background-color: #2D091F;
-        top: 5vh;
-        letter-spacing: 7.8px;
-        padding: 30px 50px;
+</style>
+
+<style lang="scss">
+.carousel-container {
+    $carousel_scale: 25vw;
+    $arrow-side: 20px;
+    height: $carousel_scale;
+
+    #carousel {
+        width: $carousel_scale;
     }
 }
 </style>

@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <router-view name="header"/>
-    <router-view />
-    <router-view name="footer"/>
+    <router-view class="header" name="header"/>
+    <router-view class="main" />
+    <router-view class="footer" name="footer"/>
 </template>
