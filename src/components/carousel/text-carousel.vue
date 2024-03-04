@@ -3,7 +3,7 @@ const { list, activeSlide, keyToShow } = defineProps(['list', 'activeSlide', "ke
 </script>
 
 <template>
-    <div class="text-center h-100">
+    <div class="text-center">
         <h1
             v-for="(item, index) in list"
             :key="index"

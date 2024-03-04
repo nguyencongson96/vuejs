@@ -5,65 +5,47 @@ import textCarousel from '@/components/carousel/text-carousel.vue'
 import genreData from '../../public/data/genres'
 import flavorData from '../../public/data/flavor'
 // import api from "../utils/api"
-const activeGenreSlide = ref(0)
-const activeFlavorSlide = ref(0)
-const changeText = ref('')
 const listGenre = genreData.list
 const listFlavor = flavorData.list
+const activeGenreSlide = ref(0)
+const activeFlavorSlide = ref(0)
 
-function handleChange(actionType = 'next', type = 'genre') {
-    const listType = type === 'genre' ? listGenre : listFlavor
-    const refType = type === 'genre' ? activeGenreSlide : activeFlavorSlide
-    const currentValue = refType.value
-    changeText.value = type
-    switch (actionType) {
-        case 'previous':
-            refType.value = currentValue === 0 ? listType.length - 1 : currentValue - 1
-            break
-
-        case 'next':
-            refType.value = currentValue === listType.length - 1 ? 0 : currentValue + 1
-            break
-        default:
-            break
-    }
+function onChange(value, index, type){
+    type === "genre"
+        ? activeGenreSlide.value = index
+        : activeFlavorSlide.value = index
 }
 
 onBeforeMount(async () => {
     console.log('run')
-    // try {
-    //     const res = await api.get("/drink");
-    //     console.log(res)
-    // } catch (error) {
-    //     console.log(error)
-    // }
 })
 </script>
 
 <template>
     <div id="wrapper" class="container-fluid text-light d-flex align-items-center">
-        <div class="carousel-container d-flex align-items-center justify-content-center gap-2 flex-fill">
+        <div class="carousel-container d-flex align-items-stretch justify-content-center gap-2 flex-fill">
             <imageCarousel
-                :transition_fade="true"
                 :list="listGenre"
-                type="genre"
-                :activeSlide="activeGenreSlide"
-                :handleChange="handleChange"
-                arrow_side="20px"
+                arrow_side="25px"
+                :item_to_show="1"
+                :onChange="(value, index)=> onChange(value, index, 'genre')"
             />
             <div class="text-container d-flex flex-column align-items-center gap-3 position-relative text-center">
                 <h2 class="fw-bold">I would like to listen to some</h2>
-                <textCarousel :list="listGenre" :activeSlide="activeGenreSlide" keyToShow="genre" />
+                <div class="mb-4">
+                    <textCarousel :list="listGenre" :activeSlide="activeGenreSlide" keyToShow="genre" />
+                </div>
                 <h2 class="fw-bold">and drink something</h2>
-                <textCarousel :list="listFlavor" :activeSlide="activeFlavorSlide" keyToShow="genre" />
+                <div class="mb-4">
+                    <textCarousel :list="listFlavor" :activeSlide="activeFlavorSlide" keyToShow="genre" />
+                </div>
                 <button class="mt-5 btn btn-primary fs-3 rounded-pill fst-italic px-4 py-3">Surprise me !!!</button>
             </div>
             <imageCarousel
                 :list="listFlavor"
-                type="flavor"
-                :activeSlide="activeFlavorSlide"
-                :handleChange="handleChange"
-                arrow_side="20px"
+                arrow_side="25px"
+                :item_to_show="1"
+                :onChange="(value, index)=> onChange(value, index, 'flavor')"
             />
         </div>
     </div>
