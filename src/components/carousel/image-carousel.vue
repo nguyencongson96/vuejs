@@ -45,7 +45,7 @@ function generateItemStyle(index) {
 
 <template>
     <div id="carousel" class="position-relative">
-        <div class="carousel-wrapper h-100 overflow-hidden">
+        <div class="carousel-wrapper px-4 h-100 overflow-hidden">
             <div
                 class="carousel-track"
                 :style="{

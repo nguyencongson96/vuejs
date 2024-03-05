@@ -11,6 +11,13 @@
     font-size: 14px;
 }
 
+button{
+    border: 0;
+    background-color: transparent;
+    line-height: 1 !important;
+    outline: none;
+}
+
 .link-white{
     text-decoration: none;
     transition: 200ms all linear;
