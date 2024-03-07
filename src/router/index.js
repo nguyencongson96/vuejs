@@ -3,7 +3,8 @@ import LoginPage from "@/views/auth/Login.vue"
 import RegisterPage from "@/views/auth/Register.vue"
 import ForgotPage from "@/views/auth/Forgot.vue"
 import Header from "@/layout/header.vue"
-import RecipeHome from "@/views/recipe/Home.vue"
+import RecipeHome from "@/views/recipe/recipeHome.vue"
+import MatchGenreAndFlavor from "@/views/match/matchGenreAndFlavor.vue"
 import { createRouter, createWebHistory } from "vue-router"
 
 const router = createRouter({
@@ -51,6 +52,16 @@ const router = createRouter({
             },
             meta: {
                 title: 'Recipe'
+            }
+        },
+        {
+            path: "/match",
+            components: {
+                default: MatchGenreAndFlavor,
+                header: Header,
+            },
+            meta: {
+                title: 'Matched Drink'
             }
         },
     ],

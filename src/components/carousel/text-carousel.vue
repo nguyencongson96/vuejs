@@ -4,14 +4,14 @@ const { list, activeSlide, keyToShow } = defineProps(['list', 'activeSlide', "ke
 
 <template>
     <div class="text-center">
-        <h1
+        <h2
             v-for="(item, index) in list"
             :key="index"
-            class="text-change"
+            class="text-change text-capitalize"
             :class="{ active: index === activeSlide }"
         >
             {{ item[keyToShow] }}
-        </h1>
+        </h2>
     </div>
 </template>
 

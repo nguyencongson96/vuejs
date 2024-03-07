@@ -6,10 +6,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
-import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import 'vuetify/styles'
 
 // Import Bootstrap styles
 import 'bootstrap/dist/css/bootstrap.css'
@@ -17,6 +17,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 const vuetify = createVuetify({
     components,
     directives,
+    theme: {
+        defaultTheme: 'dark'
+    },
     defaults: {
         global: {
             ripple: true,

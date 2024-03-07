@@ -5,8 +5,7 @@ import textCarousel from '@/components/carousel/text-carousel.vue'
 import genreData from '../../public/data/genres'
 import flavorData from '../../public/data/flavor'
 // import api from "../utils/api"
-const listGenre = genreData.list
-const listFlavor = flavorData.list
+
 const activeGenreSlide = ref(0)
 const activeFlavorSlide = ref(0)
 
@@ -23,29 +22,35 @@ onBeforeMount(async () => {
 
 <template>
     <div id="wrapper" class="container-fluid text-light d-flex align-items-center">
-        <div class="carousel-container d-flex align-items-stretch justify-content-center gap-2 flex-fill">
+        <div class="carousel-container m-auto d-flex align-items-stretch justify-content-center gap-2">
             <imageCarousel
-                :list="listGenre"
-                arrow_side="25px"
+                :list="genreData"
+                arrow_side="20px"
                 :item_to_show="1"
+                shape="circle"
                 :onChange="(value, index)=> onChange(value, index, 'genre')"
+                width="30%"
+                height="360"
             />
             <div class="text-container d-flex flex-column align-items-center gap-3 position-relative text-center">
                 <h2 class="fw-bold">I would like to listen to some</h2>
                 <div class="mb-4">
-                    <textCarousel :list="listGenre" :activeSlide="activeGenreSlide" keyToShow="genre" />
+                    <textCarousel :list="genreData" :activeSlide="activeGenreSlide" keyToShow="title" />
                 </div>
                 <h2 class="fw-bold">and drink something</h2>
                 <div class="mb-4">
-                    <textCarousel :list="listFlavor" :activeSlide="activeFlavorSlide" keyToShow="genre" />
+                    <textCarousel :list="flavorData" :activeSlide="activeFlavorSlide" keyToShow="title" />
                 </div>
-                <button class="mt-5 btn btn-primary fs-3 rounded-pill fst-italic px-4 py-3">Surprise me !!!</button>
+                <button class="mt-3 btn btn-primary fs-3 rounded-pill fst-italic px-4 py-3">Surprise me !!!</button>
             </div>
             <imageCarousel
-                :list="listFlavor"
-                arrow_side="25px"
+                :list="flavorData"
+                arrow_side="20px"
                 :item_to_show="1"
+                shape="circle"
                 :onChange="(value, index)=> onChange(value, index, 'flavor')"
+                width="30%"
+                height="360"
             />
         </div>
     </div>
@@ -54,6 +59,10 @@ onBeforeMount(async () => {
 <style scoped lang="scss">
 #wrapper {
     background: linear-gradient(180deg, #000 0%, #1b0c0c 50%);
+}
+
+.carousel-container{
+    max-width: 90vw;
 }
 .text-container {
     .btn {
@@ -95,17 +104,6 @@ onBeforeMount(async () => {
 }
 </style>
 
-<style lang="scss">
-.carousel-container {
-    $carousel_scale: 25vw;
-    $arrow-side: 20px;
-    height: $carousel_scale;
-
-    #carousel {
-        width: $carousel_scale;
-    }
-}
-</style>
 
 <script>
 export default {
