@@ -4,6 +4,7 @@ const drinkData = [
         name: 'Rosita',
         title: 'This modern tequila classic goes beyond the standard Negroni riff.',
         flavor: ["64eb2b39d5f0dee0e5cc1a78", "64eb2b3bd5f0dee0e5cc1a90"],
+        genre: ["64eb19b8eb5894dcbb7b8f46", "64eb17caf9627864be3256c8", "64eb1a6feb5894dcbb7b8f50"],
         summary:
             'The Rosita is a modern classic cocktail most often described as a tequila Negroni, though this simplistic explanation vastly undersells the drink. Both involve a combination of spirit, Campari, and vermouth, though the Rosita splits the latter ingredient into equal parts sweet and dry vermouth, making it more akin to a Perfect Negroni. Further, it incorporates a dash of Angostura bitters, to bring added depth to the bittersweet combination.',
         content:
@@ -15,6 +16,7 @@ const drinkData = [
         name: 'Frozen Pina Colada',
         title: 'Sint pariatur est est pariatur',
         flavor: ["64eb2b3ad5f0dee0e5cc1a7c", "64eb2b3bd5f0dee0e5cc1a94"],
+        genre: ["64eb16df1bbc5294691609ac", "64eb185af9627864be3256cd"],
         summary:
             'The Frozen Piña Colada, a combination of rum, pineapple, lime, and coconut, is one of the most iconic drinks in the tropical cocktail canon. But despite its omnipresence in beach bars, pop culture, and 1970s songs about attempted infidelity, it can be hard to find one definitive recipe. As the national drink of Puerto Rico, the cocktail’s ties to the island are indisputable, but from there, the origins and recipe specifications get a bit murky.',
         content:
@@ -26,6 +28,7 @@ const drinkData = [
         name: 'Tequila Espresso Martini',
         title: 'Agave and amaro shine in this variation from Bar Flores in Los Angeles.',
         flavor: ["64eb2b39d5f0dee0e5cc1a78", "64eb2b3ad5f0dee0e5cc1a80"],
+        genre: ["64eb166d1bbc5294691609a8", "64eb1937eb5894dcbb7b8f41"],
         summary:
             'At Bar Flores, in Los Angeles’s Echo Park neighborhood, owner Karla Flores-Mercado’s bar program takes an emphasis on agave spirits and applies it to a wide range of cocktails, both new and old. So when it came time to create an Espresso Martini for the menu, she naturally reached for tequila instead of the drink’s usual vodka.',
         content:
@@ -37,6 +40,7 @@ const drinkData = [
         name: 'Campari Spritz',
         title: 'Try this bitter-forward cousin to the Aperol Spritz.',
         flavor: ["64eb2b3ad5f0dee0e5cc1a84", "64eb2b3ad5f0dee0e5cc1a7c"],
+        genre: ["64eb19b8eb5894dcbb7b8f46", "64eb1a12eb5894dcbb7b8f4b"],
         summary:
             'The spritz cocktail is thought to date to the late 1800s in the Veneto region of Italy. At the time, the northeastern territory of modern-day Italy was still a part of the Austro-Hungarian empire, and the word “spritz” was derived from the German word spritzen, meaning to spray or splash.',
         content:
@@ -48,6 +52,7 @@ const drinkData = [
         name: 'Greenhorn',
         title: 'Neon-green Midori stars in this stirred tequila drink from Bobby Heugel.',
         flavor: ["64eb2b3ad5f0dee0e5cc1a88", "64eb2b3bd5f0dee0e5cc1a8c"],
+        genre: ["64eb166d1bbc5294691609a8", "64eb17caf9627864be3256c8", "64eb1937eb5894dcbb7b8f41"],
         summary:
             'Midori and blanco tequila are two ingredients that don’t often star in stirred drinks, and even less often together. At his Houston bar Refuge, bartender and owner Bobby Heugel combines the bright-green melon liqueur and a high-quality Highlands tequila expression with bittersweet aperitif Suze for a fruit-forward and gently bitter drink. Garnished with a neon-green cherry, it’s a serious cocktail that doesn’t take itself too seriously.',
         content:
@@ -59,6 +64,7 @@ const drinkData = [
         name: 'Banana Daiquiri',
         title: 'Magna ex et officia exercitation laborum duis est.',
         flavor: ["64eb2b3bd5f0dee0e5cc1a8c", "64eb2b3ad5f0dee0e5cc1a7c"],
+        genre: ["64eb1a12eb5894dcbb7b8f4b", "64eb1a6feb5894dcbb7b8f50"],
         summary:
             'The Banana Daiquiri means different things to different people. To some, it’s an ice-cold blender drink beloved as much for its fruitiness as its frothiness—one unleashed on sunny beach vacations featuring umbrellas and clear blue water. To others, it’s a fun riff on the classic shaken Daiquiri, accented with a hint of banana. Both parties are correct, but this recipe belongs to the latter camp.',
         content:
@@ -70,6 +76,7 @@ const drinkData = [
         name: 'Spicy Margarita',
         title: 'Fresh jalapeños are the key to this wildly popular riff.',
         flavor: ["64eb2b3bd5f0dee0e5cc1a90", "64eb2b3bd5f0dee0e5cc1a94"],
+        genre: ["64eb16df1bbc5294691609ac", "64eb185af9627864be3256cd"],
         summary:
             'The classic Margarita is one of the most popular cocktails in the world. Despite having no clear provenance, the combination of tequila and lime juice, plus agave syrup and/or orange liqueur, has charmed drinkers since its inception, circumnavigating its way around the globe to become one of the most ubiquitous drinks today—one that has spawned countless variations.',
         content:

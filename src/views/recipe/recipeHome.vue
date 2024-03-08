@@ -1,26 +1,37 @@
 <script setup>
-import { onBeforeMount, ref } from 'vue'
+import { onBeforeMount, ref, watch } from 'vue'
 import imageCarousel from '@/components/carousel/image-carousel.vue'
 import drinksData from '../../../public/data/drinks'
 import flavorData from '../../../public/data/flavor'
 import cardTab from '@/components/tab/card-tab.vue'
 
-// import api from "../utils/api"
 const filterList = ref(drinksData)
-const cardList = [{ label: 'All', value: '' }].concat(
-    flavorData.map((item) => ({ label: item.title, value: item.id })),
-)
+const loading = ref(false)
+const cardList = [{ label: 'All', value: '' }].concat(flavorData.map((item) => ({ label: item.title, value: item.id })))
 
-function handleChange({activeTab, inputVal}) {
-    filterList.value = drinksData.filter((subItem) => 
-        (!activeTab ? true : subItem.flavor?.includes(activeTab)) && 
-        (!inputVal ? true : subItem.name.toLowerCase()?.includes(inputVal.toLowerCase())))
+async function handleChange({ activeTab, inputVal }) {
+    loading.value = true
+    filterList.value = drinksData.filter(
+        (subItem) =>
+            (!activeTab ? true : subItem.flavor?.includes(activeTab)) &&
+            (!inputVal ? true : subItem.name.toLowerCase()?.includes(inputVal.toLowerCase())),
+    )
+
+    await new Promise((resolve) => {
+        setTimeout(() => {
+            resolve()
+        }, 1000)
+    })
+    loading.value = false
 }
+
+watch(loading, () => {
+    console.log(loading.value)
+})
 
 onBeforeMount(async () => {
     console.log('run')
 })
-
 </script>
 
 <template>
@@ -29,8 +40,8 @@ onBeforeMount(async () => {
             <div class="text-center">
                 <h1 class="title mb-4">Recipes by Flavors</h1>
                 <h5 class="px-5 sub_title mb-4">
-                    Whether sweet, fruity and smoky to bitter, sour, savory and spicy, there's a cocktail recipe to fit the
-                    flavors you're looking for. Check out all the options and get mixing to find your new favorite.
+                    Whether sweet, fruity and smoky to bitter, sour, savory and spicy, there's a cocktail recipe to fit
+                    the flavors you're looking for. Check out all the options and get mixing to find your new favorite.
                 </h5>
                 <div class="mb-5">
                     <imageCarousel
@@ -60,12 +71,20 @@ onBeforeMount(async () => {
                             <p class="content fw-light para-ellipsis ellipsis-5">
                                 {{ item.content }}
                             </p>
-                            <router-link :to="item.id" density="compact" @click="handleClick(item, index)" class="mt-3 text-white text-decoration-none">
-                                <span>Find out more</span> 
+                            <router-link
+                                :to="item.id"
+                                density="compact"
+                                @click="handleClick(item, index)"
+                                class="mt-3 text-white text-decoration-none"
+                            >
+                                <span>Find out more</span>
                                 <i class="fa-light fa-arrow-right ms-2"></i>
                             </router-link>
                         </div>
                     </div>
+                </div>
+                <div v-if="loading" class="loading-container" >
+                    <v-progress-circular class="loading" indeterminate></v-progress-circular>
                 </div>
             </div>
         </div>
@@ -75,6 +94,15 @@ onBeforeMount(async () => {
 <style scoped lang="scss">
 #wrapper {
     background: var(--red_to_black);
+}
+
+.loading-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg_blur);
 }
 
 .title {
@@ -90,6 +118,7 @@ onBeforeMount(async () => {
 }
 
 .list {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 1.5rem;
@@ -101,14 +130,13 @@ onBeforeMount(async () => {
             transition: all ease-in-out 250ms;
         }
 
-        
         .item-content {
             position: absolute;
             top: 85%;
             width: 90%;
             margin: 0 5%;
             transition: top 0.4s ease-in-out;
-            
+
             .item-title {
                 font-size: 1.25rem;
                 margin: 0;
@@ -117,7 +145,8 @@ onBeforeMount(async () => {
                 font-weight: 600;
             }
 
-            .content, a {
+            .content,
+            a {
                 opacity: 0;
             }
         }
@@ -125,17 +154,19 @@ onBeforeMount(async () => {
         &:hover {
             transition: all 0.5s 0.4s ease-in-out;
             box-shadow: rgba(255, 255, 255, 0.35) 0px 5px 15px;
+
             img {
                 transform: rotate(1deg) scale(1.2);
                 filter: brightness(50%);
                 transition: all 0.5s 0.3s ease-in-out;
             }
 
-            .item-content{
+            .item-content {
                 top: 35%;
             }
 
-            .content, a {
+            .content,
+            a {
                 opacity: 1;
                 transition: all 0.5s 0.4s ease-in-out;
             }

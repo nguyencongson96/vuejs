@@ -7,7 +7,7 @@ export default {
 <template>
     <div class="bg-black py-3 container d-flex justify-content-between align-items-center gap-2">
         <router-link to="/" class="img-container">
-            <img class="object-fit-cover" src="/logo-without-bg.png" alt="logo"/>
+            <img class="object-fit-cover" src="/img/logo-without-bg.png" alt="logo"/>
         </router-link>
         <nav class="flex-fill">
             <div class="text-light d-flex justify-content-end align-items-center gap-4">

@@ -1,11 +1,4 @@
-import './assets/css/font.css'
-import './assets/css/root.css'
-import './assets/css/main.scss'
-import './assets/css/fontawesome-all.min.css'
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-
+//import Vuetify
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
@@ -13,6 +6,16 @@ import 'vuetify/styles'
 
 // Import Bootstrap styles
 import 'bootstrap/dist/css/bootstrap.css'
+
+import './assets/css/font.css'
+import './assets/css/root.css'
+import './assets/css/main.scss'
+import './assets/css/fontawesome-all.min.css'
+import "./assets/css/vuefity-modified.scss"
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './router'
+
 
 const vuetify = createVuetify({
     components,

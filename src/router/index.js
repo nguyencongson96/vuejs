@@ -4,7 +4,7 @@ import RegisterPage from "@/views/auth/Register.vue"
 import ForgotPage from "@/views/auth/Forgot.vue"
 import Header from "@/layout/header.vue"
 import RecipeHome from "@/views/recipe/recipeHome.vue"
-import MatchGenreAndFlavor from "@/views/match/matchGenreAndFlavor.vue"
+import MatchGenreAndFlavor from "@/views/match/match_id.vue"
 import { createRouter, createWebHistory } from "vue-router"
 
 const router = createRouter({
@@ -55,7 +55,7 @@ const router = createRouter({
             }
         },
         {
-            path: "/match",
+            path: "/match/:id",
             components: {
                 default: MatchGenreAndFlavor,
                 header: Header,

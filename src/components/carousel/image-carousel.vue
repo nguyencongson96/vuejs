@@ -53,18 +53,17 @@ const handleRouter = (toggle, isSelected, item)=>{
                     <i class="fa-regular fa-chevrons-right" :style="{ fontSize: arrow_side }" />
                 </v-button>
             </template>
-            <v-slide-group-item v-for="(item, index) in list" :key="index" v-slot="{ isSelected, toggle }">
+            <v-slide-group-item v-for="(item, index) in list" :key="index" v-slot="{ isSelected, toggle }" >
                 <v-card
                     @click="handleRouter(toggle, isSelected, item)"
                     :width="width / item_to_show - 16 * (item_to_show + 1)"
                     :height="height"
                     class="slide-item"
-                    :class="{ active: isSelected }"
+                    :class="{ active: isSelected, circle: shape === 'circle' }"
                 >
                     <img
                         :src="item?.image"
                         class="object-fit-cover w-100 h-100"
-                        :class="{ circle: shape === 'circle' }"
                         alt="image"
                     />
                 </v-card>
