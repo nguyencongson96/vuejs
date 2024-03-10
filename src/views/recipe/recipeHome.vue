@@ -1,27 +1,19 @@
 <script setup>
 import { onBeforeMount, ref, watch } from 'vue'
 import imageCarousel from '@/components/carousel/image-carousel.vue'
-import drinksData from '../../../public/data/drinks'
-import flavorData from '../../../public/data/flavor'
 import cardTab from '@/components/tab/card-tab.vue'
+import api from '@/utils/api'
 
-const filterList = ref(drinksData)
+const drinksData = ref([])
+const flavorData = ref([])
 const loading = ref(false)
-const cardList = [{ label: 'All', value: '' }].concat(flavorData.map((item) => ({ label: item.title, value: item.id })))
 
 async function handleChange({ activeTab, inputVal }) {
     loading.value = true
-    filterList.value = drinksData.filter(
-        (subItem) =>
-            (!activeTab ? true : subItem.flavor?.includes(activeTab)) &&
-            (!inputVal ? true : subItem.name.toLowerCase()?.includes(inputVal.toLowerCase())),
-    )
-
-    await new Promise((resolve) => {
-        setTimeout(() => {
-            resolve()
-        }, 1000)
-    })
+    const res = await api.get("/drink", {params: activeTab && {
+        flavor_id: activeTab
+    }})
+    drinksData.value = res.data.data
     loading.value = false
 }
 
@@ -30,7 +22,12 @@ watch(loading, () => {
 })
 
 onBeforeMount(async () => {
-    console.log('run')
+    const res = await Promise.all([
+        api.get("/drink"),
+        api.get("/flavor")
+    ]) 
+    drinksData.value = res[0].data.data
+    flavorData.value = [{ label: 'All', value: '' }].concat(res[1].data.data.map((item) => ({ label: item.title, value: item._id })))
 })
 </script>
 
@@ -51,28 +48,28 @@ onBeforeMount(async () => {
                         :item_to_show="3"
                         shape="rounded"
                         width="88%"
-                        :link="(item) => `/${item.id}`"
+                        :link="(item) => `/${item._id}`"
                     />
                 </div>
             </div>
             <div class="mb-5">
-                <cardTab :list="cardList" classItem="fw-bold" :onChange="handleChange" :hasSearch="true" />
+                <cardTab :list="flavorData" classItem="fw-bold" :onChange="handleChange" :hasSearch="true" />
             </div>
             <div class="list">
                 <div
-                    v-for="(item, index) in filterList"
+                    v-for="(item, index) in drinksData"
                     :key="index"
                     class="rounded overflow-hidden position-relative list-item"
                 >
                     <img :src="item.image" alt="item" class="object-fit-cover w-100" />
                     <div class="item-content">
-                        <div class="item-title text-ellipsis mb-4">{{ item.name }}</div>
+                        <div class="item-title text-ellipsis mb-3">{{ item.name }}</div>
                         <div>
-                            <p class="content fw-light para-ellipsis ellipsis-5">
-                                {{ item.content }}
+                            <p class="content fw-light para-ellipsis ellipsis-3">
+                                {{ item.title }}
                             </p>
                             <router-link
-                                :to="item.id"
+                                :to="item._id"
                                 density="compact"
                                 @click="handleClick(item, index)"
                                 class="mt-3 text-white text-decoration-none"
@@ -162,7 +159,7 @@ onBeforeMount(async () => {
             }
 
             .item-content {
-                top: 35%;
+                top: 55%;
             }
 
             .content,

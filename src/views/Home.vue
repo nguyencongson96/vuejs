@@ -3,12 +3,13 @@ import { onBeforeMount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import imageCarousel from '@/components/carousel/image-carousel.vue'
 import textCarousel from '@/components/carousel/text-carousel.vue'
-import genreData from '../../public/data/genres'
-import flavorData from '../../public/data/flavor'
 import drinkData from '../../public/data/drinks'
-// import api from "../utils/api"
+import api from "../utils/api"
+import { toast } from 'vue3-toastify'
 
 const router = useRouter()
+const genreData = ref([])
+const flavorData = ref([])
 const activeGenreSlide = ref(0)
 const activeFlavorSlide = ref(0)
 const isNotMatched = ref(false)
@@ -17,26 +18,52 @@ function onChange(value, index, type) {
     type === 'genre' ? (activeGenreSlide.value = index) : (activeFlavorSlide.value = index)
 }
 
-function handleClick() {
-    const genreId = genreData[activeGenreSlide.value].id
-    const flavorId = flavorData[activeFlavorSlide.value].id
-    const matchDrinkId = drinkData.find((item) => item.genre.includes(genreId) && item.flavor.includes(flavorId))?.id
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+} 
 
-    matchDrinkId
-        ? router.push({ path: `/match/${matchDrinkId}`, query: { genreId, flavorId } })
-        : isNotMatched.value = true
+async function handleClick() {
+    const selectGenre = genreData.value[activeGenreSlide.value]
+    const selectFlavor = flavorData.value[activeFlavorSlide.value]
+    const selectGenreTitle = capitalizeFirstLetter(selectGenre.title)
+    const selectFlavorTitle = capitalizeFirstLetter(selectFlavor.title)
+    try {
+        const res = await api.get("/drink/match", {params: {
+            genre_id: selectGenre._id,
+            flavor_id: selectFlavor._id
+        }})
+        console.log(res)
+    } catch (error) {
+        const status = error.response.status
+        status === 403
+            ? toast("Please login to use this function!", {type: "error"})
+            : toast(`There is no combination of ${selectGenreTitle} and ${selectFlavorTitle}`, {type: "warning"})
+        
+    }
+
+    // matchDrinkId
+    //     ? router.push({ path: `/match/${matchDrinkId}`, query: { genreId, flavorId } })
+    //     : isNotMatched.value = true
 }
 
 onBeforeMount(async () => {
-    console.log('run')
+    const res = await Promise.all([
+        api.get("/genre"),
+        api.get("/flavor")
+    ]) 
+    genreData.value = res[0].data.data
+    flavorData.value = res[1].data.data
+    console.log(res[0].data.data)
 })
+
+
 </script>
 
 <template>
     <div id="wrapper" class="container-fluid text-light d-flex align-items-center main">
         <div class="carousel-container m-auto d-flex align-items-stretch justify-content-center gap-2">
             <imageCarousel :list="genreData" arrow_side="20px" :item_to_show="1" shape="circle"
-                :onChange="(value, index) => onChange(value, index, 'genre')" width="30%" height="360" />
+                :onChange="(value, index) => onChange(value, index + 1, 'genre')" width="30%" height="360" />
             <div class="text-container d-flex flex-column align-items-center gap-3 position-relative text-center">
                 <h2 class="fw-bold">I would like to listen to some</h2>
                 <div class="mb-4">
@@ -51,7 +78,7 @@ onBeforeMount(async () => {
                 </button>
             </div>
             <imageCarousel :list="flavorData" arrow_side="20px" :item_to_show="1" shape="circle"
-                :onChange="(value, index) => onChange(value, index, 'flavor')" width="30%" height="360" />
+                :onChange="(value, index) => onChange(value, index + 1, 'flavor')" width="30%" height="360" />
         </div>
     </div>
     <v-dialog v-model="isNotMatched" max-width="540">
