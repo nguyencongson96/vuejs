@@ -35,6 +35,7 @@ const vuetify = createVuetify({
 
 // Create Vue app
 const app = createApp(App)
+app.config.globalProperties.spotifyURI = "sdafs"
 app.use(router)
 app.use(vuetify)
 app.use(Vue3Toasity, {
@@ -42,5 +43,8 @@ app.use(Vue3Toasity, {
     theme: "dark"
 })
 
+
 // Mount the app
 app.mount('#app')
+
+export default app

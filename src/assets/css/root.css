@@ -1,5 +1,6 @@
 :root {
     --yellow: #F0D67C;
     --red_to_black: linear-gradient(180deg, #000 0%, #2a0606 20%);
+    --red_to_blue: linear-gradient(0deg, #140038 0%, rgba(0,0,0,1) 30%, rgba(83,9,9,1) 95%, rgba(0,0,0,1) 100%);
     --bg_blur: rgba(0, 0, 0, 0.1);
 }

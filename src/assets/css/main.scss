@@ -25,11 +25,16 @@ button{
 }
 
 .header {
-    max-height: 12vh;
+    max-height: 10vh;
+    z-index: 10;
+}
+
+.footer{
+    z-index: 10;
 }
 
 .main {
-    min-height: 88vh;
+    min-height: 90vh;
 }
 
 .text-ellipsis{
@@ -58,4 +63,12 @@ button{
 
 .ellipsis-5{
     -webkit-line-clamp: 5;
+}
+
+.ellipsis-6{
+    -webkit-line-clamp: 6;
+}
+
+.ellipsis-7{
+    -webkit-line-clamp: 7;
 }

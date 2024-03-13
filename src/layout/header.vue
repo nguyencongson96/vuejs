@@ -12,8 +12,8 @@ export default {
         <nav class="flex-fill">
             <div class="text-light d-flex justify-content-end align-items-center gap-4">
                 <router-link class="link-white" to="/recipe">Recipe</router-link>
-                <router-link class="link-white" to="/match">Shop</router-link>
-                <router-link class="link-white" to="/auth/forgot">About Us</router-link>
+                <router-link class="link-white" to="/match/123">Shop</router-link>
+                <router-link class="link-white" to="/about">About Us</router-link>
                 <div>Hi, User</div>
             </div>
         </nav>

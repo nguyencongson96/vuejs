@@ -1,13 +1,10 @@
 <script setup>
 import { onBeforeMount, ref } from 'vue'
-import { useRouter } from 'vue-router'
 import imageCarousel from '@/components/carousel/image-carousel.vue'
 import textCarousel from '@/components/carousel/text-carousel.vue'
-import drinkData from '../../public/data/drinks'
 import api from "../utils/api"
 import { toast } from 'vue3-toastify'
 
-const router = useRouter()
 const genreData = ref([])
 const flavorData = ref([])
 const activeGenreSlide = ref(0)
@@ -82,7 +79,7 @@ onBeforeMount(async () => {
         </div>
     </div>
     <v-dialog v-model="isNotMatched" max-width="540">
-          <template v-slot:default="{ isActive }">
+          <template>
             <v-card>
                 <v-card-title class="d-flex align-items-center gap-3 text-danger fw-bold">
                     <i class="fa-solid fa-exclamation fs-5"></i>

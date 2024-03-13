@@ -1,4 +1,9 @@
 @font-face {
+    font-family: Josefin Slab;
+    src: url('@/assets/fonts/JosefinSlab.ttf');
+}
+
+@font-face {
     font-family: Noto Sans;
     src: url('@/assets/fonts/NotoSans.ttf');
 }
