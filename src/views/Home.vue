@@ -4,12 +4,15 @@ import imageCarousel from '@/components/carousel/image-carousel.vue'
 import textCarousel from '@/components/carousel/text-carousel.vue'
 import api from "../utils/api"
 import { toast } from 'vue3-toastify'
+import { useRouter } from 'vue-router'
+import app from '../main.js';
 
 const genreData = ref([])
 const flavorData = ref([])
 const activeGenreSlide = ref(0)
 const activeFlavorSlide = ref(0)
 const isNotMatched = ref(false)
+const router = useRouter()
 
 function onChange(value, index, type) {
     type === 'genre' ? (activeGenreSlide.value = index) : (activeFlavorSlide.value = index)
@@ -29,7 +32,14 @@ async function handleClick() {
             genre_id: selectGenre._id,
             flavor_id: selectFlavor._id
         }})
-        console.log(res)
+        const result = res.data.data
+        app.config.globalProperties = {
+            $playlist: result.playlist,
+            $drink: result.drink,
+            $genre: result.genre,
+            $flavor: selectFlavor
+        }
+        router.push({ path: `/match/${result.drink._id}`, query: { genreId: selectGenre._id, flavorId: selectFlavor._id} })
     } catch (error) {
         const status = error.response.status
         status === 403
@@ -37,10 +47,6 @@ async function handleClick() {
             : toast(`There is no combination of ${selectGenreTitle} and ${selectFlavorTitle}`, {type: "warning"})
         
     }
-
-    // matchDrinkId
-    //     ? router.push({ path: `/match/${matchDrinkId}`, query: { genreId, flavorId } })
-    //     : isNotMatched.value = true
 }
 
 onBeforeMount(async () => {
@@ -50,7 +56,6 @@ onBeforeMount(async () => {
     ]) 
     genreData.value = res[0].data.data
     flavorData.value = res[1].data.data
-    console.log(res[0].data.data)
 })
 
 

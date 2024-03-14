@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-    <div class="bg-black footer">
+    <div class="bg-black">
         <iframe
             class="frame"
             style="border-radius: 12px"
@@ -20,11 +20,3 @@ export default {
         ></iframe>
     </div>
 </template>
-
-<style scoped lang="scss">
-    .footer{
-        position: sticky;
-        bottom: 0;
-        width: 100%;
-    }
-</style>

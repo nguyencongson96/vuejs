@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="d-flex align-items-center justify-content-between mt-5 text-white">
+    <div class="d-flex align-items-center justify-content-between mt-5 pt-5 text-white">
         <div>
             <div class="icon position-relative mb-2">
                 <div class="round-1"></div>

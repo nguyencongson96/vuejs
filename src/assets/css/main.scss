@@ -1,6 +1,18 @@
+html{
+    overflow: auto;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 #app {
     background: #000;
-    min-height: 100vh;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 * {
@@ -9,6 +21,11 @@
     margin: 0;
     font-family: Noto Sans;
     font-size: 14px;
+}
+
+ol, ul{
+    padding: 0;
+    margin-bottom: 0;
 }
 
 button{
@@ -25,16 +42,25 @@ button{
 }
 
 .header {
-    max-height: 10vh;
+    max-height: 100px;
     z-index: 10;
+    background: var(--black_to_transparent);
 }
 
 .footer{
     z-index: 10;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    line-height: 0;
+    max-height: 152px;
+    background: var(--transparent_to_black);
 }
 
 .main {
-    min-height: 90vh;
+    flex: 1;
+    // min-height: calc(90vh - 152px);
+    // overflow: hidden;
 }
 
 .text-ellipsis{
@@ -49,26 +75,12 @@ button{
     -webkit-box-orient: vertical;
 }
 
-.ellipsis-2{
-    -webkit-line-clamp: 2;
+.text-yellow{
+    color: var(--yellow)
 }
 
-.ellipsis-3{
-    -webkit-line-clamp: 3;
-}
-
-.ellipsis-4{
-    -webkit-line-clamp: 4;
-}
-
-.ellipsis-5{
-    -webkit-line-clamp: 5;
-}
-
-.ellipsis-6{
-    -webkit-line-clamp: 6;
-}
-
-.ellipsis-7{
-    -webkit-line-clamp: 7;
+@for $i from 2 through 20 {
+    .ellipsis-#{$i}{
+        -webkit-line-clamp: #{$i};
+    }
 }

@@ -2,6 +2,7 @@
 import { onBeforeMount, ref, watch } from 'vue'
 import imageCarousel from '@/components/carousel/image-carousel.vue'
 import cardTab from '@/components/tab/card-tab.vue'
+import subFooter from "@/layout/sub-footer.vue"
 import api from '@/utils/api'
 
 const drinksData = ref([])
@@ -84,6 +85,7 @@ onBeforeMount(async () => {
                     <v-progress-circular class="loading" indeterminate></v-progress-circular>
                 </div>
             </div>
+            <subFooter/>
         </div>
     </div>
 </template>

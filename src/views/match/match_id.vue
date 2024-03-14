@@ -1,18 +1,15 @@
 <script setup>
 import subFooter from '@/layout/sub-footer.vue';
 import { onMounted } from 'vue';
-import drinkData from '../../../public/data/drinks';
-import genreData from '../../../public/data/genres';
-import flavorData from '../../../public/data/flavor';
 import app from '../../main.js';
+import { useRouter } from 'vue-router';
 
-const drinkObj = drinkData[0]
-const genreObj = genreData[0]
-const flavorObj = flavorData[0]
 const width = 400
+const router = useRouter()
+const {$drink, $genre} = app.config.globalProperties
 
 onMounted(() => {
-    console.log(drinkObj, genreObj, flavorObj, app.config.globalProperties.spotifyURI)
+    !$drink?._id && router.push("/404")
 })
 </script>
 
@@ -28,7 +25,7 @@ onMounted(() => {
                         class="rounded"
                         cover
                         lazy-src="/img/default.jpg"
-                        :src="genreObj.image"
+                        :src="$genre.image"
                         :width="width"
                         :height="width"
                         :style="{ maxWidth: width + 'px' }"
@@ -36,14 +33,14 @@ onMounted(() => {
                 </v-col>
                 <v-col cols="7">
                     <v-card class="text-center fst-italic px-4 py-2 bg-transparent">
-                        <v-card-title class="text-uppercase fs-3 mb-4">- {{ genreObj.title }} music -</v-card-title>
-                        <v-card-text class="text para-ellipsis ellipsis-7">{{ genreObj.summary }}</v-card-text>
+                        <v-card-title class="text-uppercase fs-3 mb-4">- {{ $genre.title }} music -</v-card-title>
+                        <v-card-text class="text para-ellipsis ellipsis-7">{{ $genre.summary }}</v-card-text>
                     </v-card>
                 </v-col>
                 <v-col cols="7">
                     <v-card class="text-center fst-italic px-4 py-2 bg-transparent">
-                        <v-card-title class="text-uppercase fs-3 mb-4">- {{ drinkObj.name }} music -</v-card-title>
-                        <p class="text para-ellipsis ellipsis-7">{{ drinkObj.content }}</p>
+                        <v-card-title class="text-uppercase fs-3 mb-4">- {{ $drink.name }} -</v-card-title>
+                        <p class="text para-ellipsis ellipsis-7">{{ $drink.summary }}</p>
                     </v-card>
                 </v-col>
                 <v-col cols="5">
@@ -52,7 +49,7 @@ onMounted(() => {
                             class="rounded"
                             cover
                             lazy-src="/img/default.jpg"
-                            :src="drinkObj.image"
+                            :src="$drink.image"
                             :width="width"
                             :height="width"
                             :style="{ maxWidth: width + 'px' }"

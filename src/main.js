@@ -35,7 +35,13 @@ const vuetify = createVuetify({
 
 // Create Vue app
 const app = createApp(App)
-app.config.globalProperties.spotifyURI = "sdafs"
+app.config.globalProperties = {
+    $drink: {},
+    $playlist: {},
+    $genre: {},
+    $flavor: {}
+}
+ 
 app.use(router)
 app.use(vuetify)
 app.use(Vue3Toasity, {

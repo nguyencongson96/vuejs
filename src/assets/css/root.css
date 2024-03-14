@@ -1,6 +1,9 @@
 :root {
     --yellow: #F0D67C;
+    --smoke: #F4F3F2;
     --red_to_black: linear-gradient(180deg, #000 0%, #2a0606 20%);
+    --black_to_transparent: linear-gradient(180deg, #000 70%, rgba(0,0,0,0) 100%);
+    --transparent_to_black: linear-gradient(0deg, #000 70%, rgba(0,0,0,0) 100%);
     --red_to_blue: linear-gradient(0deg, #140038 0%, rgba(0,0,0,1) 30%, rgba(83,9,9,1) 95%, rgba(0,0,0,1) 100%);
     --bg_blur: rgba(0, 0, 0, 0.1);
 }

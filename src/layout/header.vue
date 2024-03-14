@@ -5,18 +5,20 @@ export default {
 </script>
 
 <template>
-    <div class="bg-black py-3 container d-flex justify-content-between align-items-center gap-2">
-        <router-link to="/" class="img-container">
-            <img class="object-fit-cover" src="/img/logo-without-bg.png" alt="logo"/>
-        </router-link>
-        <nav class="flex-fill">
-            <div class="text-light d-flex justify-content-end align-items-center gap-4">
-                <router-link class="link-white" to="/recipe">Recipe</router-link>
-                <router-link class="link-white" to="/match/123">Shop</router-link>
-                <router-link class="link-white" to="/about">About Us</router-link>
-                <div>Hi, User</div>
-            </div>
-        </nav>
+    <div class="container-fluid">
+        <div class="container d-flex justify-content-between align-items-center gap-2 py-3">
+            <router-link to="/" class="img-container">
+                <img class="object-fit-cover" src="/img/logo-without-bg.png" alt="logo"/>
+            </router-link>
+            <nav class="flex-fill">
+                <div class="text-light d-flex justify-content-end align-items-center gap-4">
+                    <router-link class="link-white" to="/recipe">Recipe</router-link>
+                    <router-link class="link-white" to="/match/123">Shop</router-link>
+                    <router-link class="link-white" to="/about">About Us</router-link>
+                    <div>Hi, User</div>
+                </div>
+            </nav>
+        </div>
     </div>
 </template>
 

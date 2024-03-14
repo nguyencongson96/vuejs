@@ -1,13 +1,15 @@
-import HomePage from "@/views/Home.vue"
-import LoginPage from "@/views/auth/Login.vue"
-import RegisterPage from "@/views/auth/Register.vue"
-import ForgotPage from "@/views/auth/Forgot.vue"
-import Header from "@/layout/header.vue"
-import Footer from "@/layout/footer.vue"
-import RecipeHome from "@/views/recipe/recipeHome.vue"
-import MatchGenreAndFlavor from "@/views/match/match_id.vue"
-import AboutHome from "@/views/about/aboutHome.vue"
-import { createRouter, createWebHistory } from "vue-router"
+import HomePage from '@/views/Home.vue'
+import LoginPage from '@/views/auth/Login.vue'
+import RegisterPage from '@/views/auth/Register.vue'
+import ForgotPage from '@/views/auth/Forgot.vue'
+import Header from '@/layout/header.vue'
+import Footer from '@/layout/footer.vue'
+import RecipeHome from '@/views/recipe/recipeHome.vue'
+import RecipeDetail from '@/views/recipe/recipeDetail.vue'
+import MatchGenreAndFlavor from '@/views/match/match_id.vue'
+import AboutHome from '@/views/about/aboutHome.vue'
+import NotFound from '@/views/others/notFound.vue'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const route = [
     {
@@ -16,8 +18,8 @@ const route = [
         onlyMainLayout: true,
         component: LoginPage,
         meta: {
-            title: 'Login'
-        }
+            title: 'Login',
+        },
     },
     {
         name: 'signup',
@@ -25,8 +27,8 @@ const route = [
         onlyMainLayout: true,
         component: RegisterPage,
         meta: {
-            title: 'Register'
-        }
+            title: 'Register',
+        },
     },
     {
         name: 'forgot',
@@ -34,50 +36,70 @@ const route = [
         onlyMainLayout: true,
         component: ForgotPage,
         meta: {
-            title: 'Forgot'
-        }
+            title: 'Forgot',
+        },
     },
     {
-        path: "/",
+        path: '/',
         components: {
             default: HomePage,
         },
         meta: {
-            title: 'HomePage'
-        }
+            title: 'HomePage',
+        },
     },
     {
-        path: "/recipe",
+        path: '/recipe',
         components: {
             default: RecipeHome,
         },
         meta: {
-            title: 'Recipe'
-        }
+            title: 'Recipe',
+        },
     },
     {
-        path: "/match/:id",
+        path: '/recipe/:id',
+        components: {
+            default: RecipeDetail,
+        },
+        meta: {
+            title: ':id',
+        },
+    },
+    {
+        path: '/match/:id',
         components: {
             default: MatchGenreAndFlavor,
         },
         meta: {
-            title: 'Matched Drink'
-        }
+            title: 'Matched Drink',
+        },
     },
     {
-        path: "/about",
+        path: '/about',
         components: {
             default: AboutHome,
         },
         meta: {
-            title: 'About Us'
-        }
+            title: 'About Us',
+        },
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        component: {
+            default: NotFound,
+        },
+        meta: {
+            title: 'Not Found',
+        },
     },
 ]
 
 const router = createRouter({
     history: createWebHistory(),
-    routes: route.map(item => item.onlyMainLayout ? item : {...item, components: {...item.components, header: Header, footer: Footer} })
+    routes: route.map((item) =>
+        item.onlyMainLayout ? item : { ...item, components: { ...item.components, header: Header, footer: Footer } },
+    ),
 })
 router.beforeEach((to) => {
     document.title = to.meta?.title ?? 'Default Title'
