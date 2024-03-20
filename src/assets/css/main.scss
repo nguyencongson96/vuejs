@@ -1,11 +1,29 @@
-html{
+html {
     overflow: auto;
 }
 
-body{
+body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+
+    &::-webkit-scrollbar {
+        width: var(--sb-size);
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--sb-track-color);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--sb-thumb-color);
+    }
+
+    @supports not selector(::-webkit-scrollbar) {
+        & {
+            scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+        }
+    }
 }
 
 #app {
@@ -23,22 +41,25 @@ body{
     font-size: 14px;
 }
 
-ol, ul{
+ol,
+ul {
     padding: 0;
     margin-bottom: 0;
 }
 
-button{
+button {
     border: 0;
     background-color: transparent;
     line-height: 1 !important;
     outline: none;
 }
 
-.link-white{
+.link-white {
     text-decoration: none;
     transition: 200ms all linear;
-    &:not(:hover){color: #fff};
+    &:not(:hover) {
+        color: #fff;
+    }
 }
 
 .header {
@@ -47,7 +68,7 @@ button{
     background: var(--black_to_transparent);
 }
 
-.footer{
+.footer {
     z-index: 10;
     position: sticky;
     bottom: 0;
@@ -63,24 +84,54 @@ button{
     // overflow: hidden;
 }
 
-.text-ellipsis{
+.text-ellipsis {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.para-ellipsis{
+.para-ellipsis {
     display: -webkit-box;
     overflow: hidden;
     -webkit-box-orient: vertical;
 }
 
-.text-yellow{
-    color: var(--yellow)
+.text-yellow {
+    color: var(--yellow);
+}
+
+.frame * {
+    background-color: var(--black);
 }
 
 @for $i from 2 through 20 {
-    .ellipsis-#{$i}{
+    .ellipsis-#{$i} {
         -webkit-line-clamp: #{$i};
     }
+}
+
+.scrollbar {
+    &::-webkit-scrollbar {
+        width: var(--sb-size);
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--sb-track-color);
+        border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: var(--sb-thumb-color);
+        border-radius: 5px;
+    }
+
+    @supports not selector(::-webkit-scrollbar) {
+        & {
+            scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+        }
+    }
+}
+
+.reflect-img{
+    -webkit-box-reflect: below 10px linear-gradient(to bottom, rgba(0,0,0,0) 65%, rgba(0,0,0,0.35));
 }

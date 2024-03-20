@@ -30,6 +30,7 @@ onBeforeMount(async () => {
     drinksData.value = res[0].data.data
     flavorData.value = [{ label: 'All', value: '' }].concat(res[1].data.data.map((item) => ({ label: item.title, value: item._id })))
 })
+
 </script>
 
 <template>
@@ -49,7 +50,7 @@ onBeforeMount(async () => {
                         :item_to_show="3"
                         shape="rounded"
                         width="88%"
-                        :link="(item) => `/${item._id}`"
+                        :link="(item) => `/recipe/${item._id}`"
                     />
                 </div>
             </div>
@@ -70,9 +71,8 @@ onBeforeMount(async () => {
                                 {{ item.title }}
                             </p>
                             <router-link
-                                :to="item._id"
+                                :to="`/recipe/${item._id}`"
                                 density="compact"
-                                @click="handleClick(item, index)"
                                 class="mt-3 text-white text-decoration-none"
                             >
                                 <span>Find out more</span>

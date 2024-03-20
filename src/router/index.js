@@ -3,7 +3,7 @@ import LoginPage from '@/views/auth/Login.vue'
 import RegisterPage from '@/views/auth/Register.vue'
 import ForgotPage from '@/views/auth/Forgot.vue'
 import Header from '@/layout/header.vue'
-import Footer from '@/layout/footer.vue'
+import Footer from '@/layout/footerLayout.vue'
 import RecipeHome from '@/views/recipe/recipeHome.vue'
 import RecipeDetail from '@/views/recipe/recipeDetail.vue'
 import MatchGenreAndFlavor from '@/views/match/match_id.vue'
@@ -63,7 +63,7 @@ const route = [
             default: RecipeDetail,
         },
         meta: {
-            title: ':id',
+            title: 'Detail Drink',
         },
     },
     {

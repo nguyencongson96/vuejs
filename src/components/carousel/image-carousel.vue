@@ -27,16 +27,19 @@ const activeIndex = ref(Math.ceil(item_to_show/2) - 1)
 const router = useRouter();
 
 const handleChange = (direction) => {
-    typeof onChange === 'function' && onChange(list[activeIndex.value], activeIndex.value)
     direction()
+    typeof onChange === 'function' && onChange(list[activeIndex.value], activeIndex.value)
 }
 
 const handleRouter = (toggle, isSelected, item)=>{
-    console.log(link(item))
-    isSelected
-        ? router.push(link(item))
-        : toggle()
+    if(isSelected && link){
+        router.push(link(item))
+    }
+    else {
+        toggle()
+    }
 }
+
 
 </script>
 
@@ -53,17 +56,19 @@ const handleRouter = (toggle, isSelected, item)=>{
                     <i class="fa-regular fa-chevrons-right" :style="{ fontSize: arrow_side }" />
                 </v-button>
             </template>
-            <v-slide-group-item v-for="(item, index) in list" :key="index" v-slot="{ isSelected, toggle }" >
+            <v-slide-group-item  v-for="(item, index) in list" :key="index" v-slot="{ isSelected, toggle }" >
                 <v-card
                     @click="handleRouter(toggle, isSelected, item)"
                     :width="width / item_to_show - 16 * (item_to_show + 1)"
                     :height="height"
                     class="slide-item"
-                    :class="{ active: isSelected, circle: shape === 'circle' }"
+                    :class="{ active: isSelected, circle: shape === 'circle'}"
                 >
-                    <img
+                    <v-img
                         :src="item?.image"
-                        class="object-fit-cover w-100 h-100"
+                        :height="height"
+                        :width="height"
+                        cover
                         alt="image"
                     />
                 </v-card>
@@ -74,7 +79,7 @@ const handleRouter = (toggle, isSelected, item)=>{
 
 <style scoped lang="scss">
 .slide-item {
-    transition: all ease-in-out 300ms;
+    transition: all ease-in-out 500ms;
     margin: 0 16px;
     opacity: 0.5;
     transform: scale(0.7);

@@ -8,7 +8,7 @@ export default {
     <div class="container-fluid">
         <div class="container d-flex justify-content-between align-items-center gap-2 py-3">
             <router-link to="/" class="img-container">
-                <img class="object-fit-cover" src="/img/logo-without-bg.png" alt="logo"/>
+                <v-img src="/img/logo-without-bg.png" height="60" width="60" cover alt="logo"/>
             </router-link>
             <nav class="flex-fill">
                 <div class="text-light d-flex justify-content-end align-items-center gap-4">
@@ -23,14 +23,7 @@ export default {
 </template>
 
 <style scoped lang="scss">
-.img-container{
-    height: 100%;
-    img{
-        max-height: 60px;
-        max-width: 100%;
-        aspect-ratio: 1/1;
-    }
-}
+
 nav > div {
     $border-width: 1px;
     $font-size: 1.25rem;

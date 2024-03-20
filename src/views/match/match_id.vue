@@ -4,7 +4,7 @@ import { onMounted } from 'vue';
 import app from '../../main.js';
 import { useRouter } from 'vue-router';
 
-const width = 400
+const width = 380
 const router = useRouter()
 const {$drink, $genre} = app.config.globalProperties
 
@@ -22,13 +22,13 @@ onMounted(() => {
             <v-row align="center" class="text-white row-container">
                 <v-col cols="5" class="d-flex align-items-center justify-content-center">
                     <v-img
-                        class="rounded"
+                        class="rounded reflect-img"
                         cover
                         lazy-src="/img/default.jpg"
                         :src="$genre.image"
                         :width="width"
                         :height="width"
-                        :style="{ maxWidth: width + 'px' }"
+                        :max-width="width"
                     />
                 </v-col>
                 <v-col cols="7">
@@ -46,13 +46,13 @@ onMounted(() => {
                 <v-col cols="5">
                     <div class="p-5">
                         <v-img
-                            class="rounded"
+                            class="rounded reflect-img"
                             cover
                             lazy-src="/img/default.jpg"
                             :src="$drink.image"
                             :width="width"
                             :height="width"
-                            :style="{ maxWidth: width + 'px' }"
+                            :max-width="width"
                         />
                     </div>
                 </v-col>

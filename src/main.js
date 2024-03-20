@@ -28,7 +28,15 @@ const vuetify = createVuetify({
         global: {
             ripple: true,
         },
-        VSheet: {
+        VImg: {
+            // Use default slot to set lazy-src attribute
+            $_vuetify_subcomponents: {
+                // Override the default slot of VImg
+                img: {
+                    // Set the default lazy-src attribute value
+                    default: { 'lazy-src': '/img/default.jpg' }
+                }
+            }
         },
     },
 })
@@ -39,7 +47,8 @@ app.config.globalProperties = {
     $drink: {},
     $playlist: {},
     $genre: {},
-    $flavor: {}
+    $flavor: {},
+    $loading: false
 }
  
 app.use(router)
